@@ -1,0 +1,78 @@
+# Always include everything inside opengl/src/
+!opengl/src/**
+
+# Always include solution & project files
+!*.sln
+!*.vcxproj
+!*.vcxproj.filters
+
+# Ignore Visual Studio user-specific files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.userprefs
+
+# Ignore build output directories
+[Bb]in/
+[Oo]bj/
+Debug/
+Release/
+x64/
+x86/
+ARM/
+ARM64/
+
+# Ignore temporary build files
+*.log
+*.tlog
+*.lastbuildstate
+*.idb
+*.pdb
+*.pch
+*.ipch
+*.obj
+*.tmp
+*.tmp_proj
+*.cache
+*.ilk
+*.res
+*.exp
+
+# Ignore executables and libraries
+*.exe
+*.dll
+*.lib
+*.app
+*.out
+*.so
+
+# Ignore NuGet packages
+*.nupkg
+*.snupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Ignore vcpkg build artifacts
+vcpkg_installed/
+buildtrees/
+downloads/
+
+# Ignore local OpenGL dependencies (if built locally)
+Dependencies/
+libs/
+*.a
+*.dylib
+
+# Ignore CMake files (if used)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Ignore misc
+*.db
+*.opendb
+*.VC.db
+*.VC.VC.opendb
