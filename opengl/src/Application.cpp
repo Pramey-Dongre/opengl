@@ -16,6 +16,7 @@
 #include"glm/gtc/matrix_transform.hpp"
 #include "imgui/imgui.h"
 #include"imgui/imgui_impl_glfw_gl3.h"
+#include"tests/TestClearColor.h"
 //extern "C" {
 //    __declspec(dllexport) unsigned long NvOptimusEnablement = 0x00000001;
 //}
@@ -163,25 +164,25 @@ int main(void)
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
     {
-        float positions[] = {
-            //   X(px)    Y(px)    U     V
-              0.0f,   0.0f,  0.0f, 0.0f,  // vertex 0 (bottom-left)
-            384.0f,   0.0f,  1.0f, 0.0f,  // vertex 1
-            384.0f, 216.0f,  1.0f, 1.0f,  // vertex 2
-              0.0f, 216.0f,  0.0f, 1.0f,  // vertex 3
-            192.0f, 324.0f,  0.5f, 1.2f,  // vertex 4 (top middle)
-            192.0f, -108.0f, 0.5f,-0.2f   // vertex 5 (bottom middle)
-        };
+        //float positions[] = {
+        //    //   X(px)    Y(px)    U     V
+        //      0.0f,   0.0f,  0.0f, 0.0f,  // vertex 0 (bottom-left)
+        //    384.0f,   0.0f,  1.0f, 0.0f,  // vertex 1
+        //    384.0f, 216.0f,  1.0f, 1.0f,  // vertex 2
+        //      0.0f, 216.0f,  0.0f, 1.0f,  // vertex 3
+        //    192.0f, 324.0f,  0.5f, 1.2f,  // vertex 4 (top middle)
+        //    192.0f, -108.0f, 0.5f,-0.2f   // vertex 5 (bottom middle)
+        //};
 
         //We can calculate uv, values by using formula
         //u = (x-MINx)/(MAXx-MINx)
         //v = (y-MINy)/(MAXy-MINy)
-        unsigned int indices[] = {
-            0 , 1 , 2,
-            2 , 3 , 0,
-            2 , 3 , 4,
-            0 , 1 , 5
-        };
+        //unsigned int indices[] = {
+        //    0 , 1 , 2,
+        //    2 , 3 , 0,
+        //    2 , 3 , 4,
+        //    0 , 1 , 5
+        //};
 
  
         //VAO
@@ -194,13 +195,13 @@ int main(void)
         //GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
         //GLCall(glBufferData(GL_ARRAY_BUFFER, 2*6*sizeof(float),positions,GL_STATIC_DRAW));
         //Vertex attributes
-        VertexArray va;
-        VertexBuffer vbo(positions, 6 * 4 * sizeof(float));
+        //VertexArray va;
+        //VertexBuffer vbo(positions, 6 * 4 * sizeof(float));
 
-        VertexBufferLayout layout;
-        layout.Push<float>(2);
-        layout.Push<float>(2);
-        va.AddBuffer(vbo,layout);
+        //VertexBufferLayout layout;
+        //layout.Push<float>(2);
+        //layout.Push<float>(2);
+        //va.AddBuffer(vbo,layout);
 
         //GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float),0));
         //GLCall(glEnableVertexAttribArray(0));
@@ -210,7 +211,7 @@ int main(void)
         //GLCall(glGenBuffers(1, &ibo));
         //GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
         //GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 12 * sizeof(unsigned int), indices, GL_STATIC_DRAW));
-        IndexBuffer ibo(indices, 12);
+        //IndexBuffer ibo(indices, 12);
         //Done recording
         /*glBindVertexArray(0);*/
         //glClearColor(0.1f, 0.1f, 0.1f, 1.0f); // Dark grey background
@@ -219,39 +220,39 @@ int main(void)
         //glDebugMessageCallback(GLDebugMessageCallback, nullptr);
 
         //glm::mat4 proj = glm::ortho(-2.0f,2.0f,-1.5f,1.5f,-1.0f,1.0f);
-        glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
+        //glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
 
-        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+        //glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 
-        
-        for (int row = 0; row < 4; ++row)
-        {
-            for (int col = 0; col < 4; ++col)
-            {
-                std::cout << proj[col][row] << "\t"; // glm is column-major
-            }
-            std::cout << "\n";
-        }
+        //
+        //for (int row = 0; row < 4; ++row)
+        //{
+        //    for (int col = 0; col < 4; ++col)
+        //    {
+        //        std::cout << proj[col][row] << "\t"; // glm is column-major
+        //    }
+        //    std::cout << "\n";
+        //}
 
-        Shader shader("res/Basic.shader");
-        shader.Bind();
+        //Shader shader("res/Basic.shader");
+        //shader.Bind();
         //ShaderProgramSource source = ParseShader("res/Basic.shader");
         //unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);
         //GLCall(glUseProgram(shader));
 
-        shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
+        //shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
         
         //int location = glGetUniformLocation(shader, "u_Color");
         //ASSERT(location != -1);
         //GLCall(glUniform4f(location, 0.8f, 0.3f, 0.8f, 1.0f));
 
-        Texture texture("res/textures/porsche.png");
-        texture.Bind();
-        shader.SetUniform1i("u_Texture",0);
-        va.Unbind();
-        vbo.Unbind();
-        ibo.Unbind();
-        shader.Unbind();
+        //Texture texture("res/textures/porsche.png");
+        //texture.Bind();
+        //shader.SetUniform1i("u_Texture",0);
+        //va.Unbind();
+        //vbo.Unbind();
+        //ibo.Unbind();
+        //shader.Unbind();
         //GLCall(glUseProgram(0));
         //GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
         //GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
@@ -262,12 +263,14 @@ int main(void)
         ImGui_ImplGlfwGL3_Init(window, true);
         ImGui::StyleColorsDark();
 
+        test::TestClearColor Test;
 
-        float r = 0.0f;
-        float increment = 0.05f;
-        glm::vec3 translationA = glm::vec3(100, 0, 0);
-        glm::vec3 translationB = glm::vec3(200, 0, 0);
-        glm::vec4 myColors = glm::vec4(0.0f, 0.0f, 0.0f,1.0f);
+
+        //float r = 0.0f;
+        //float increment = 0.05f;
+        //glm::vec3 translationA = glm::vec3(100, 0, 0);
+        //glm::vec3 translationB = glm::vec3(200, 0, 0);
+        //glm::vec4 myColors = glm::vec4(0.0f, 0.0f, 0.0f,1.0f);
 
         while (!glfwWindowShouldClose(window))
         {
@@ -275,15 +278,25 @@ int main(void)
             renderer.Clear();
             //GLCall(glClear(GL_COLOR_BUFFER_BIT));
             
+            Test.OnUpdate(0.0f);
+            Test.OnRender();
             // Start the Dear ImGui frame
             ImGui_ImplGlfwGL3_NewFrame();
 
-            glm::mat4 model = glm::translate(glm::mat4(1.0f), translationA);
-            glm::mat4 mvp = proj * view * model;
+            Test.OnImGuiRender();
+            ImGui::Render();
+            ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+            /* Swap front and back buffers */
+            GLCall(glfwSwapBuffers(window));
 
-            shader.Bind();
+            /* Poll for and process events */
+            GLCall(glfwPollEvents());
+            //glm::mat4 model = glm::translate(glm::mat4(1.0f), translationA);
+            //glm::mat4 mvp = proj * view * model;
+
+            //shader.Bind();
             //shader.SetUniform4f("u_Color", myColors.x,myColors.y,myColors.z,myColors.w);
-            shader.SetUniformMat4f("u_MVP", mvp);
+            //shader.SetUniformMat4f("u_MVP", mvp);
             //shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
            /* GLCall(glUseProgram(shader));
             GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));*/
@@ -291,12 +304,12 @@ int main(void)
             /*GLCall(glBindVertexArray(vao));*/
             /*va.Bind();
             ibo.Bind();*/
-            renderer.Draw(va, ibo, shader);
+            //renderer.Draw(va, ibo, shader);
 
-            model = glm::translate(glm::mat4(1.0f), translationB);
-            mvp = proj * view * model;
-            shader.SetUniformMat4f("u_MVP", mvp);
-            renderer.Draw(va, ibo, shader);
+            //model = glm::translate(glm::mat4(1.0f), translationB);
+            //mvp = proj * view * model;
+            //shader.SetUniformMat4f("u_MVP", mvp);
+            //renderer.Draw(va, ibo, shader);
 
             //GLCall(glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, nullptr));
             //if (r > 1.0f)
@@ -306,11 +319,11 @@ int main(void)
             //r += increment;
             {
 
-                ImGui::SliderFloat3("TranslationA", &translationA.x, 0.0f, 960.0f);          // Edit 1 float using a slider from 0.0f to 1.0f
-                ImGui::SliderFloat3("TranslationB", &translationB.x, 0.0f, 960.0f);          // Edit 1 float using a slider from 0.0f to 1.0f
+                //ImGui::SliderFloat3("TranslationA", &translationA.x, 0.0f, 960.0f);          // Edit 1 float using a slider from 0.0f to 1.0f
+                //ImGui::SliderFloat3("TranslationB", &translationB.x, 0.0f, 960.0f);          // Edit 1 float using a slider from 0.0f to 1.0f
                 //ImGui::SliderFloat4("Color", &myColors.x, 0.0f, 1.0f);
                 //ImGui::ColorEdit4("Color", &myColors.x);
-                ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+                //ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
             }
             //glBegin(GL_TRIANGLES);
             //glColor3f(1.0f, 0.0f, 0.0f); // Set color to red
@@ -319,13 +332,6 @@ int main(void)
             //glVertex2f(0.5f, 0.5f );
             //glEnd();
 
-            ImGui::Render();
-            ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
-            /* Swap front and back buffers */
-            GLCall(glfwSwapBuffers(window));
-
-            /* Poll for and process events */
-            GLCall(glfwPollEvents());
         }
     }
     // Cleanup
