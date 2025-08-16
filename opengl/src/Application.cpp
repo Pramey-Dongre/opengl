@@ -16,7 +16,11 @@
 #include"glm/gtc/matrix_transform.hpp"
 #include "imgui/imgui.h"
 #include"imgui/imgui_impl_glfw_gl3.h"
+
 #include"tests/TestClearColor.h"
+#include"tests/TestTexture2D.h"
+#include"tests/TestTriangle.h"
+#include"tests/Test.h"
 //extern "C" {
 //    __declspec(dllexport) unsigned long NvOptimusEnablement = 0x00000001;
 //}
@@ -160,8 +164,8 @@ int main(void)
     // 0.375f, -0.6495f,
     // 0.75f, 0.0f,
     //};
-    GLCall(glEnable(GL_BLEND));
-    GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+    //GLCall(glEnable(GL_BLEND));
+    //GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 
     {
         //float positions[] = {
@@ -263,7 +267,15 @@ int main(void)
         ImGui_ImplGlfwGL3_Init(window, true);
         ImGui::StyleColorsDark();
 
-        test::TestClearColor Test;
+        test::Test* currentTest = nullptr;
+        test::TestMenu* testMenu = new test::TestMenu(currentTest);
+        currentTest = testMenu;
+
+        testMenu->RegisterTest<test::TestClearColor>("Clear Color");
+        testMenu->RegisterTest<test::TestTexture2D>("Texture 2D");
+        testMenu->RegisterTest<test::TestTriangle>("Traingle");
+
+        //test::TestClearColor test;
 
 
         //float r = 0.0f;
@@ -274,16 +286,31 @@ int main(void)
 
         while (!glfwWindowShouldClose(window))
         {
+            GLCall(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
             /* Render here */
             renderer.Clear();
             //GLCall(glClear(GL_COLOR_BUFFER_BIT));
             
-            Test.OnUpdate(0.0f);
-            Test.OnRender();
+            //test.OnUpdate(0.0f);
+            //test.OnRender();
             // Start the Dear ImGui frame
             ImGui_ImplGlfwGL3_NewFrame();
 
-            Test.OnImGuiRender();
+            if (currentTest)
+            {
+                currentTest->OnUpdate(0.0f);
+                currentTest->OnRender();
+                ImGui::Begin("Test");
+                if (currentTest != testMenu && ImGui::Button("<-"))
+                {
+                    delete currentTest;
+                    currentTest = testMenu;
+                }
+                currentTest->OnImGuiRender();
+                ImGui::End();
+            }
+            //test.OnImGuiRender();
+            //ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
             ImGui::Render();
             ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
             /* Swap front and back buffers */
@@ -333,7 +360,11 @@ int main(void)
             //glEnd();
 
         }
+        delete currentTest;
+        if (currentTest != testMenu)
+            delete testMenu;
     }
+    
     // Cleanup
     ImGui_ImplGlfwGL3_Shutdown();
     ImGui::DestroyContext();
