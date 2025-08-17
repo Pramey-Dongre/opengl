@@ -19,14 +19,14 @@ public:
 	~Shader();
 
 	void Bind() const;
-	void Unbind() const;
+	void Unbind() const; 
 
 	//Set Uniforms
 	void SetUniform1i(const std::string& name, int value);
 	void SetUniform1f(const std::string& name, float value);
 	void SetUniformMat4f(const std::string& name, const glm::mat4& matrix);
 	void SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3);
-
+	inline unsigned int GetRendererId() { return m_RendererID; }
 private:
 	ShaderProgramSource ParseShader(const std::string& filepath);
 	unsigned int CompileShader(unsigned int type, const std::string& source);

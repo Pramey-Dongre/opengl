@@ -66,6 +66,9 @@
     <ClCompile Include="src\tests\TestTriangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\tests\TestQuadBatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Basic.shader" />
@@ -484,6 +487,7 @@
       <Filter>Header Files</Filter>
     </None>
     <None Include="res\Triangle.shader" />
+    <None Include="res\Quad.shader" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Renderer.h">
@@ -1407,9 +1411,15 @@
     <ClInclude Include="src\tests\TestTriangle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\tests\TestQuadBatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\porsche.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\textures\lambo.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

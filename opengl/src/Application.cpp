@@ -20,6 +20,7 @@
 #include"tests/TestClearColor.h"
 #include"tests/TestTexture2D.h"
 #include"tests/TestTriangle.h"
+#include"tests/TestQuadBatch.h"
 #include"tests/Test.h"
 //extern "C" {
 //    __declspec(dllexport) unsigned long NvOptimusEnablement = 0x00000001;
@@ -274,6 +275,7 @@ int main(void)
         testMenu->RegisterTest<test::TestClearColor>("Clear Color");
         testMenu->RegisterTest<test::TestTexture2D>("Texture 2D");
         testMenu->RegisterTest<test::TestTriangle>("Traingle");
+        testMenu->RegisterTest<test::TestQuadBatch>("Quad");
 
         //test::TestClearColor test;
 
