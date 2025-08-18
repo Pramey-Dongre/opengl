@@ -11,11 +11,18 @@
 #include"glm/gtc/matrix_transform.hpp"
 namespace test
 {
+	//struct Vertex
+	//{
+	//	float Position[3];
+	//	float Color[4];
+	//	float TexCoords[2];
+	//	float TexID;
+	//};
 	struct Vertex
 	{
-		float Position[3];
-		float Color[4];
-		float TexCoords[2];
+		glm::vec3 Position;
+		glm::vec4 Color;
+		glm::vec2 TexCoords;
 		float TexID;
 	};
 	class TestQuadBatch :public Test
@@ -31,8 +38,8 @@ namespace test
 
 	private:
 		float m_Positions[72];
-		float m_QuadPosition1[2] = {50.0f,100.0f};
-		float m_QuadPosition2[2] = {200.0f,250.0f};
+		float m_QuadPosition1[2] = {300.0f,100.0f};
+		float m_QuadPosition2[2] = {450.0f,100.0f};
 		float m_Speed = 0.1f;
 		unsigned int m_Indices[12];
 		uint32_t m_FirstT;

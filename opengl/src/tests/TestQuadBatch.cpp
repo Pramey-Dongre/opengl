@@ -10,39 +10,35 @@ namespace test
 	{
 		float size = 100.0f; // or make this another parameter if you want variable size
 
-		Vertex v0;
-		v0.Position[0] = x;
-		v0.Position[1] = y;
-		v0.Position[2] = 0.0f;
-		v0.Color[0] = 0.18f; v0.Color[1] = 0.6f; v0.Color[2] = 0.96f; v0.Color[3] = 1.0f;
-		v0.TexCoords[0] = 0.0f; v0.TexCoords[1] = 0.0f;
-		v0.TexID = texID;
+		std::array<Vertex, 4> quad;
 
-		Vertex v1;
-		v1.Position[0] = x + size;
-		v1.Position[1] = y;
-		v1.Position[2] = 0.0f;
-		v1.Color[0] = 0.18f; v1.Color[1] = 0.6f; v1.Color[2] = 0.96f; v1.Color[3] = 1.0f;
-		v1.TexCoords[0] = 1.0f; v1.TexCoords[1] = 0.0f;
-		v1.TexID = texID;
+		glm::vec4 color = { 0.18f, 0.6f, 0.96f, 1.0f };
 
-		Vertex v2;
-		v2.Position[0] = x + size;
-		v2.Position[1] = y + size;
-		v2.Position[2] = 0.0f;
-		v2.Color[0] = 0.18f; v2.Color[1] = 0.6f; v2.Color[2] = 0.96f; v2.Color[3] = 1.0f;
-		v2.TexCoords[0] = 1.0f; v2.TexCoords[1] = 1.0f;
-		v2.TexID = texID;
+		// Bottom-left
+		quad[0].Position = { x, y, 0.0f };
+		quad[0].Color = color;
+		quad[0].TexCoords = { 0.0f, 0.0f };
+		quad[0].TexID = texID;
 
-		Vertex v3;
-		v3.Position[0] = x;
-		v3.Position[1] = y + size;
-		v3.Position[2] = 0.0f;
-		v3.Color[0] = 0.18f; v3.Color[1] = 0.6f; v3.Color[2] = 0.96f; v3.Color[3] = 1.0f;
-		v3.TexCoords[0] = 0.0f; v3.TexCoords[1] = 1.0f;
-		v3.TexID = texID;
+		// Bottom-right
+		quad[1].Position = { x + 50.0f, y, 0.0f };
+		quad[1].Color = color;
+		quad[1].TexCoords = { 1.0f, 0.0f };
+		quad[1].TexID = texID;
 
-		return { v0, v1, v2, v3 };
+		// Top-right
+		quad[2].Position = { x + 50.0f, y + 50.0f, 0.0f };
+		quad[2].Color = color;
+		quad[2].TexCoords = { 1.0f, 1.0f };
+		quad[2].TexID = texID;
+
+		// Top-left
+		quad[3].Position = { x, y + 50.0f, 0.0f };
+		quad[3].Color = color;
+		quad[3].TexCoords = { 0.0f, 1.0f };
+		quad[3].TexID = texID;
+
+		return quad;
 	}
 	TestQuadBatch::TestQuadBatch()
 		:m_Positions{ 
